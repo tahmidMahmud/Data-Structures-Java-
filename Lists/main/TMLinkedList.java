@@ -1,18 +1,49 @@
+
 import java.util.*;
 
 /**
  * Created by tahmid on 10/21/2015.
  */
-public class TMLinkedList<T> {
+class Node<T> {
+
+    Node nextNode;
+    T data;
+
+    public Node(Object value) {
+        nextNode = null;
+        data = (T) value;
+    }
+
+    public Node(Object value, Node<T> nextValue) {
+        nextNode = nextValue;
+        data = (T) value;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object value) {
+        data = (T) value;
+    }
+
+    public Node getNext() {
+        return nextNode;
+    }
+
+    public void setNext(Node nextValue) {
+        nextNode = nextValue;
+    }
+}
+
+public class TMLinkedList<Type> {
 
     private int size;
-    private boolean isEmpty;
-    private T node;
+    private Node<Type> rootNode;
 
-    public TMLinkedList<T>(){
+    public TMLinkedList(){
         size = 0;
-        isEmpty = true;
-        node = new T();
+        rootNode = new Node<Type>(null);
     }
 
     public int size() {
@@ -21,115 +52,44 @@ public class TMLinkedList<T> {
 
 
     public boolean isEmpty() {
-        return isEmpty;
+        return size==0 ? true : false;
     }
-
-
-    public boolean contains(Object o) {
-        return false;
-    }
-
-
-    public Iterator iterator() {
-        return null;
-    }
-
-
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
 
     public boolean add(Object o) {
-        if (o.getClass() == node.getClass()){
-            node = (T) o;
-            return true;
+        Node<Type> tempNode = new Node(o);
+        Node<Type> currentNode = rootNode;
+
+        while (currentNode.getNext() != null) {
+            currentNode = currentNode.getNext();
         }
-        return false;
+
+        currentNode.setNext(tempNode);
+        size++;
+
+        return true;
     }
-
-
-    public boolean remove(Object o) {
-        return false;
-    }
-
-
-    public boolean addAll(Collection c) {
-        return false;
-    }
-
-
-    public boolean addAll(int index, Collection c) {
-        return false;
-    }
-
-
-    public void clear() {
-
-    }
-
 
     public Object get(int index) {
-        return null;
+        int i = 0;
+        Node<Type> currentNode = rootNode;
+
+        while (i < index) {
+            currentNode = currentNode.getNext();
+            i++;
+        }
+
+        return currentNode.nextNode.getData();
     }
 
+    public Object[] toArray() {
+        Object[] array = new Object[size];
+        int i = 0;
 
-    public Object set(int index, Object element) {
-        return null;
+        while(i < size){
+            array[i] = get(i);
+            i++;
+        }
+
+        return array;
     }
-
-
-    public void add(int index, Object element) {
-
-    }
-
-
-    public Object remove(int index) {
-        return null;
-    }
-
-
-    public int indexOf(Object o) {
-        return 0;
-    }
-
-
-    public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-
-    public ListIterator listIterator() {
-        return null;
-    }
-
-
-    public ListIterator listIterator(int index) {
-        return null;
-    }
-
-
-    public List subList(int fromIndex, int toIndex) {
-        return null;
-    }
-
-
-    public boolean retainAll(Collection c) {
-        return false;
-    }
-
-
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-
-    public boolean containsAll(Collection c) {
-        return false;
-    }
-
-//    @Override
-//    public T[] toArray(Object[] a) {
-//        return new T[0];
-//    }
 }
