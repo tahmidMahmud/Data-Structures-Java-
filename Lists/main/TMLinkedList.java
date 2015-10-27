@@ -4,37 +4,6 @@ import java.util.*;
 /**
  * Created by tahmid on 10/21/2015.
  */
-class Node<T> {
-
-    Node nextNode;
-    T data;
-
-    public Node(Object value) {
-        nextNode = null;
-        data = (T) value;
-    }
-
-    public Node(Object value, Node<T> nextValue) {
-        nextNode = nextValue;
-        data = (T) value;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object value) {
-        data = (T) value;
-    }
-
-    public Node getNext() {
-        return nextNode;
-    }
-
-    public void setNext(Node nextValue) {
-        nextNode = nextValue;
-    }
-}
 
 public class TMLinkedList<Type> {
 
@@ -91,5 +60,52 @@ public class TMLinkedList<Type> {
         }
 
         return array;
+    }
+
+    public boolean remove(int index) {
+        Node<Type> currentNode = rootNode;
+
+        for (int i = 0; i < index; i++) {
+            if (currentNode.getNext() == null) {
+                return false;
+            }
+
+            currentNode = currentNode.getNext();
+        }
+        currentNode.setNext(currentNode.getNext().getNext());
+        size--; 
+        return true;
+    }
+
+    class Node<T> {
+
+        Node nextNode;
+        T data;
+
+        public Node(Object value) {
+            nextNode = null;
+            data = (T) value;
+        }
+
+        public Node(Object value, Node<T> nextValue) {
+            nextNode = nextValue;
+            data = (T) value;
+        }
+
+        public Object getData() {
+            return data;
+        }
+
+        public void setData(Object value) {
+            data = (T) value;
+        }
+
+        public Node getNext() {
+            return nextNode;
+        }
+
+        public void setNext(Node nextValue) {
+            nextNode = nextValue;
+        }
     }
 }

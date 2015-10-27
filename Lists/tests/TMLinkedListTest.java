@@ -85,4 +85,15 @@ public class TMLinkedListTest {
         assertArrayEquals(test, list.toArray());
 
     }
+
+    @Test
+    public void remove(){
+        list.add(1);
+        list.add(2);
+        list.remove(1);
+        Integer[] test = {1};
+
+        assertArrayEquals(test, list.toArray());
+
+    }
 }
