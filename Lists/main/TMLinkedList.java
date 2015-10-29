@@ -1,6 +1,4 @@
 
-import java.util.*;
-
 /**
  * Created by tahmid on 10/21/2015.
  */
@@ -21,7 +19,7 @@ public class TMLinkedList<Type> {
 
 
     public boolean isEmpty() {
-        return size==0 ? true : false;
+        return size==0;
     }
 
     public boolean add(Object o) {
@@ -106,18 +104,7 @@ public class TMLinkedList<Type> {
             data = (T) value;
         }
 
-        public Node(Object value, Node<T> nextValue) {
-            nextNode = nextValue;
-            data = (T) value;
-        }
-
-        public Object getData() {
-            return data;
-        }
-
-        public void setData(Object value) {
-            data = (T) value;
-        }
+        public Object getData() { return data; }
 
         public Node getNext() {
             return nextNode;
