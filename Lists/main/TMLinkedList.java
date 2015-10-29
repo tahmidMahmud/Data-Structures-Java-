@@ -12,7 +12,7 @@ public class TMLinkedList<Type> {
 
     public TMLinkedList(){
         size = 0;
-        rootNode = new Node<Type>(null);
+        rootNode = new Node<>(null);
     }
 
     public int size() {
@@ -32,6 +32,23 @@ public class TMLinkedList<Type> {
             currentNode = currentNode.getNext();
         }
 
+        currentNode.setNext(tempNode);
+        size++;
+
+        return true;
+    }
+
+    public boolean add(int index, Object o) {
+        Node<Type> tempNode = new Node(o);
+        Node<Type> currentNode = rootNode;
+
+        if(index < 0 || index > size){ return false; }
+
+        for(int i = 0; i < index; i++){
+            currentNode = currentNode.nextNode;
+        }
+
+        tempNode.setNext(currentNode.getNext());
         currentNode.setNext(tempNode);
         size++;
 
@@ -65,6 +82,8 @@ public class TMLinkedList<Type> {
     public boolean remove(int index) {
         Node<Type> currentNode = rootNode;
 
+        if(index < 0 || index >= size){ return  false;}
+
         for (int i = 0; i < index; i++) {
             if (currentNode.getNext() == null) {
                 return false;
@@ -73,7 +92,7 @@ public class TMLinkedList<Type> {
             currentNode = currentNode.getNext();
         }
         currentNode.setNext(currentNode.getNext().getNext());
-        size--; 
+        size--;
         return true;
     }
 
